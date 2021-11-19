@@ -17,42 +17,21 @@ void imprimirFechaAct(int dia, int mes, int anio){
 }
 
 int anioBisiesto(int anio, int mes){
-    int i, febrero;
-    int meses[12];
-    int totalMes;
+    int febrero;
 
     if (anio % 4 != 0 || (anio % 100 == 0 && anio % 400 !=0)) // Dado que un año bisiesto es divisible entre 4 usamos la siguiente formula
         febrero = 29;
     else
         febrero = 28;
 
-    for(i = 0; i < 12; i++){
-        mes++;
-
-       switch(mes){
-        case 4: case 6: case 9: case 11:
-        totalMes = 30;
-        meses[i] = totalMes;
-        break;
-        case 2:
-        totalMes = febrero;
-        meses[i] = totalMes;
-        break;
-        case 1: case 3: case 5: case 7: case 8: case 10: case 12:
-        totalMes = 31;
-        meses[i] = totalMes;
-        break;
-        }
-    }
-    printf("arreglo meses:");
-    for(i = 0; i < 12; i++){
-        printf("-%i",meses[i]);
-    }
-    return totalMes;
+    return febrero;
 }
 
 void calendario(int dia, int mes, int anio){
     int opcion, i, semana;
+    int bisiesto = anioBisiesto(anio,mes);
+    int totalMes;
+
     //int totalM = anioBisiesto(anio, mes);
     time_t sisTime;
     //varible puntero para poder acceder a los valores de la estructura 'tm'
@@ -65,7 +44,8 @@ void calendario(int dia, int mes, int anio){
     mes=fActual->tm_mon;  //Acceder al mes de la estructura tm y se asigna
     anio=(fActual->tm_year)+1900; //Contador apartir de 1900
 
-    printf("Elige una opcion:\n1.-Visualizar calendario del mes\n2.-Visualizar calendario actual\n3.-Saber el dia de la semana de una fecha\n4.-Salir\n");
+
+    printf("Elige una opcion:\n1.-Visualizar calendario de un mes\n2.-Visualizar calendario del mes actual\n3.-Saber el dia de la semana de una fecha\n4.-Salir\n");
     scanf("%i",&opcion);
 
   switch(opcion)
@@ -80,29 +60,58 @@ void calendario(int dia, int mes, int anio){
       system("cls");
 
       switch(mes){
-        case 1: printf("\t\tENERO\t%i",anio);break;
-        case 2: printf("\t\tFEBRERO\t%i",anio);break;
-        case 3: printf("\t\tMARZO\t%i",anio);break;
-        case 4: printf("\t\tABRIL\t%i",anio);break;
-        case 5: printf("\t\tMAYO\t%i",anio);break;
-        case 6: printf("\t\tJUNIO\t%i",anio);break;
-        case 7: printf("\t\tJULIO\t%i",anio);break;
-        case 8: printf("\t\tAGOSTO\t%i",anio);break;
-        case 9: printf("\t\tSEPTIEMBRE\t%i",anio);break;
-        case 10: printf("\t\tOCTUBRE\t%i",anio);break;
-        case 11: printf("\t\tNOVIEMBRE\t%i",anio);break;
-        case 12: printf("\t\tDICIEMBRE\t%i",anio);break;
+        case 1:
+            printf("\t\tENERO\t%i",anio);
+            totalMes = 31;
+            break;
+        case 2:
+            printf("\t\tFEBRERO\t%i",anio);
+            totalMes = bisiesto;
+            break;
+        case 3:
+            printf("\t\tMARZO\t%i",anio);
+            totalMes = 31;
+            break;
+        case 4:
+            printf("\t\tABRIL\t%i",anio);
+            totalMes = 30;
+            break;
+        case 5:
+            printf("\t\tMAYO\t%i",anio);
+            totalMes = 31;
+            break;
+        case 6:
+            printf("\t\tJUNIO\t%i",anio);
+            totalMes = 30;
+            break;
+        case 7: printf("\t\tJULIO\t%i",anio);
+            totalMes = 31;
+            break;
+        case 8: printf("\t\tAGOSTO\t%i",anio);
+            totalMes = 31;
+            break;
+        case 9: printf("\t\tSEPTIEMBRE\t%i",anio);
+            totalMes = 30;
+            break;
+        case 10: printf("\t\tOCTUBRE\t%i",anio);
+            totalMes = 31;
+            break;
+        case 11: printf("\t\tNOVIEMBRE\t%i",anio);
+            totalMes = 30;
+            break;
+        case 12: printf("\t\tDICIEMBRE\t%i",anio);
+            totalMes = 31;
+            break;
       }
+      semana=((anio-1)%7+ ((anio-1)/4 -(3*((anio-1)/100+1)/4))%7+totalMes+1%7)%7;
       //impresion del calendario. OSWALDO
       break;
 
       case 2:
       //impresion del calendario actual. OSWALDO
       break;
-      //arreglar. Se llaman 3 veces a la funcion anioBisiesto.
       /*case 3:
-        semana=((anio-1)%7+ ((anio-1)/4 -(3*((anio-1)/100+1)/4))%7+totalM+1%7)%7;
-        printf("Primer dia:%i",dia);
+
         break;*/
       case 4:
         system("exit");
