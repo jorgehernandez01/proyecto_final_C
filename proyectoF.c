@@ -28,7 +28,7 @@ int anioBisiesto(int anio, int mes){
 }
 
 void calendario(int dia, int mes, int anio){
-    int opcion, i, semana;
+    int opcion, i, semana, m;
     int bisiesto = anioBisiesto(anio,mes);
     int totalMes;
 
@@ -40,18 +40,10 @@ void calendario(int dia, int mes, int anio){
      // convertimos los valores almacenados en la variable 'sisTime' a compatibles con la estructura 'tm' y lo asignamos al puntero
     fActual = localtime(&sisTime);
 
-<<<<<<< Updated upstream
+
     dia=fActual->tm_mday; //Acceder al valor de dia de la estructura tm y se asigna
     mes=fActual->tm_mon;  //Acceder al mes de la estructura tm y se asigna
     anio=(fActual->tm_year)+1900; //Contador apartir de 1900
-=======
-if (anio % 4 != 0 || (anio % 100 == 0 && anio % 400 !=0)) // Dado que un anio bisiesto es divisible entre 4 usamos la siguiente formula
-  printf("\nNo es  anio bisiesto");
-  else
-  printf("\nEs año bisiesto");
-  printf("\n\n\n");
->>>>>>> Stashed changes
-
 
     printf("Elige una opcion:\n1.-Visualizar calendario de un mes\n2.-Visualizar calendario del mes actual\n3.-Saber el dia de la semana de una fecha\n4.-Salir\n");
     scanf("%i",&opcion);
@@ -113,10 +105,37 @@ if (anio % 4 != 0 || (anio % 100 == 0 && anio % 400 !=0)) // Dado que un anio bi
       }
       semana=((anio-1)%7+ ((anio-1)/4 -(3*((anio-1)/100+1)/4))%7+totalMes+1%7)%7;
       //impresion del calendario. OSWALDO
+      printf("Se muestra el calendario solicitado\n");
+      printf("\n Dom \tLun \tMar\tMie\tJue\tVie\tSab\n");
+
+      for(m=0;m<semana;m++){
+        printf("\t");
+        for(i=0;i<totalMes;i++){
+            if(i==8-semana||i==15-semana||i==22-semana||i==29-semana||i==36-semana){
+                printf("\n%d\t",i);
+            }
+            else{
+                printf("%d\t",i);
+            }
+        }
+      }
       break;
 
       case 2:
-      //impresion del calendario actual. OSWALDO
+        semana=((anio-1)%7+ ((anio-1)/4 -(3*((anio-1)/100+1)/4))%7+totalMes+1%7)%7;
+        printf("\n Dom \tLun \tMar\tMie\tJue\tVie\tSab\n");
+
+        for(m=0;m<semana;m++){
+            printf("\t");
+            for(i=0;i<31;i++){
+                if(i==8-semana||i==15-semana||i==22-semana||i==29-semana||i==36-semana){
+                    printf("\n%d\t",i);
+                }
+                else{
+                    printf("%d\t",i);
+                }
+            }
+      }
       break;
       /*case 3:
 
@@ -136,7 +155,6 @@ int main(){
     imprimirFechaAct(dia,mes,anio);
     anioBisiesto(anio,mes);
     calendario(dia,mes,anio);
-    printf("HOLA MUNDO");
 
   return 0;
 }
