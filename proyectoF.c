@@ -42,11 +42,11 @@ void calendario(int dia, int mes, int anio){
 
 
     dia=fActual->tm_mday; //Acceder al valor de dia de la estructura tm y se asigna
-    mes=fActual->tm_mon;  //Acceder al mes de la estructura tm y se asigna
+    mes=fActual->tm_mon+1;  //Acceder al mes de la estructura tm y se asigna
     anio=(fActual->tm_year)+1900; //Contador apartir de 1900
-
     printf("Elige una opcion:\n1.-Visualizar calendario de un mes\n2.-Visualizar calendario del mes actual\n3.-Saber el dia de la semana de una fecha\n4.-Salir\n");
     scanf("%i",&opcion);
+
 
   switch(opcion)
   {
@@ -104,18 +104,17 @@ void calendario(int dia, int mes, int anio){
             break;
       }
       semana=((anio-1)%7+ ((anio-1)/4 -(3*((anio-1)/100+1)/4))%7+totalMes+1%7)%7;
-      //impresion del calendario. OSWALDO
-      printf("Se muestra el calendario solicitado\n");
+      printf("\nSe muestra el calendario solicitado\n");
       printf("\n Dom \tLun \tMar\tMie\tJue\tVie\tSab\n");
 
       for(m=0;m<semana;m++){
         printf("\t");
-        for(i=0;i<totalMes;i++){
+        for(i=1;i<=totalMes;i++){
             if(i==8-semana||i==15-semana||i==22-semana||i==29-semana||i==36-semana){
-                printf("\n%d\t",i);
+                printf("\n%i\t",i);
             }
             else{
-                printf("%d\t",i);
+                printf("%i\t",i);
             }
         }
       }
@@ -125,9 +124,20 @@ void calendario(int dia, int mes, int anio){
         semana=((anio-1)%7+ ((anio-1)/4 -(3*((anio-1)/100+1)/4))%7+totalMes+1%7)%7;
         printf("\n Dom \tLun \tMar\tMie\tJue\tVie\tSab\n");
 
+        switch(mes){
+            case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                totalMes = 31;
+                break;
+            case 2:
+                totalMes = bisiesto;
+                break;
+            case 4: case 6: case 9: case 11:
+                totalMes = 30;
+                break;
+        }
         for(m=0;m<semana;m++){
             printf("\t");
-            for(i=0;i<31;i++){
+            for(i=1;i<=totalMes;i++){
                 if(i==8-semana||i==15-semana||i==22-semana||i==29-semana||i==36-semana){
                     printf("\n%d\t",i);
                 }
@@ -135,22 +145,20 @@ void calendario(int dia, int mes, int anio){
                     printf("%d\t",i);
                 }
             }
-      }
+        }
       break;
-      /*case 3:
+      case 3:
 
-        break;*/
+        break;
       case 4:
         system("exit");
         break;
     }
-  }
+}
 
 int main(){
-    //variables para los ciclos
-    int i=0,m;
     //variables para almacenar los valores de dia, mes y a�o de la estructura tm
-    int dia, mes = 0, anio = 2010;
+    int dia, mes, anio;
 
     imprimirFechaAct(dia,mes,anio);
     anioBisiesto(anio,mes);
