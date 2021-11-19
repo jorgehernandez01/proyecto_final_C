@@ -117,6 +117,7 @@ void calendario(int dia, int mes, int anio){
                 printf("%i\t",i);
             }
         }
+        break;
       }
       break;
 
@@ -139,12 +140,13 @@ void calendario(int dia, int mes, int anio){
             printf("\t");
             for(i=1;i<=totalMes;i++){
                 if(i==8-semana||i==15-semana||i==22-semana||i==29-semana||i==36-semana){
-                    printf("\n%d\t",i);
+                    printf("\n%i\t",i);
                 }
                 else{
-                    printf("%d\t",i);
+                    printf("%i\t",i);
                 }
             }
+            break;
         }
       break;
       case 3:
