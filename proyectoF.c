@@ -40,9 +40,17 @@ void calendario(int dia, int mes, int anio){
      // convertimos los valores almacenados en la variable 'sisTime' a compatibles con la estructura 'tm' y lo asignamos al puntero
     fActual = localtime(&sisTime);
 
+<<<<<<< Updated upstream
     dia=fActual->tm_mday; //Acceder al valor de dia de la estructura tm y se asigna
     mes=fActual->tm_mon;  //Acceder al mes de la estructura tm y se asigna
     anio=(fActual->tm_year)+1900; //Contador apartir de 1900
+=======
+if (anio % 4 != 0 || (anio % 100 == 0 && anio % 400 !=0)) // Dado que un anio bisiesto es divisible entre 4 usamos la siguiente formula
+  printf("\nNo es  anio bisiesto");
+  else
+  printf("\nEs año bisiesto");
+  printf("\n\n\n");
+>>>>>>> Stashed changes
 
 
     printf("Elige una opcion:\n1.-Visualizar calendario de un mes\n2.-Visualizar calendario del mes actual\n3.-Saber el dia de la semana de una fecha\n4.-Salir\n");
