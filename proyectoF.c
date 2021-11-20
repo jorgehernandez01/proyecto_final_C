@@ -28,9 +28,11 @@ int anioBisiesto(int anio, int mes){
 }
 
 void calendario(int dia, int mes, int anio){
-    int opcion, i, semana, m;
+    int opcion, i, semana, m,diasem;
     int bisiesto = anioBisiesto(anio,mes);
     int totalMes;
+    int d,a;
+    int result1,result2,result3,result4,result5;
 
     //int totalM = anioBisiesto(anio, mes);
     time_t sisTime;
@@ -150,8 +152,60 @@ void calendario(int dia, int mes, int anio){
         }
       break;
       case 3:
+      	printf("Introduce un dia de la semana en numero: ");
+			scanf("%d",&d);
+			printf("Introduce un mes en numero: ");
+			scanf("%d",&m);
+			printf("Introduce un anyo en numero: ");
+			scanf("%d",&a);
 
-        break;
+		/*	if((a%4==0) && !(a%100==0))
+			{
+    			m=bisiesto[m-1];
+			}
+			else if (a%400==0)
+			{
+    			m=bisiesto[m-1];
+			}
+			else
+			{
+    			m=regular[m-1];
+			}
+        */
+result1=(a-1)%7;
+result2=(a-1)/4;
+result3=(3*(((a-1)/100)+1))/4;
+result4=(result2-result3)%7;
+result5=d%7;
+d=(result1+result4+m+result5)%7;
+			switch(d)
+			{
+				case 1:
+				printf("DOMINGO\n");
+				break;
+				case 2:
+				printf("LUNES\n");
+				break;
+				case 3:
+				printf("MARTES\n");
+				break;
+				case 4:
+				printf("MIERCOLES\n");
+				break;
+				case 5:
+				printf("JUEVES\n");
+				break;
+				case 6:
+				printf("VIERNES\n");
+				break;
+				case 7:
+				printf("SABADO\n");
+				break;
+			}
+			system("pause");
+      break;
+
+        
       case 4:
         system("exit");
         break;
