@@ -164,6 +164,14 @@ void calendario(int dia, int mes, int anio){
             result4=(result2-result3)%7;
             result5=d%7;
             d=(result1+result4+m+result5)%7;
+
+
+			result1=(a-1)%7;
+			result2=(a-1)/4;
+			result3=(3*(((a-1)/100)+1))/4;
+			result4=(result2-result3)%7;
+			result5=d%7;
+			d=(result1+result4+m+result5)%7;
 			switch(d)
 			{
 				case 1:
